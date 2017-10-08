@@ -6,15 +6,16 @@
 #include <iostream>
 using namespace std;
 #include "ContactName.h"
+#include<fstream>
 
 string name;
-string lastName;
 int phoneNumber;
-string header="A(Add) | S (Search) | D(Delete) |L(List) |Q(Quit): S";
+string header="A(Add) | S (Search) | D(Delete) |L(List) |Q(Quit):   ";
 string choice;
 string input;
+ContactName phoneList[100];
 
-
+int index=0;
 void add(){
 
 }
@@ -29,7 +30,18 @@ void list(){
 }
 
 int main() {
+	ofstream infile;
+	ofstream outfile("book2.tex");
+	//int i=0;
+	ifstream file;
+	file.open("book.txt");
 
+	while(file>> name>>phoneNumber){
+
+		phoneList[index++]=ContactName (name, phoneNumber);
+
+
+	}
 
 
 	cout<<header<< endl;
@@ -40,7 +52,7 @@ int main() {
 		cin>>name;
 		cout<<"Enter Phone Number: "<<endl;
 		cin>>phoneNumber;
-		ContactName n1 (name,name, phoneNumber);
+		phoneList[index]=ContactName (name, phoneNumber);
 
 
 	}if (choice=="S"){
@@ -54,7 +66,7 @@ int main() {
 
 	}else {
 		cout<<"Wrong Entry,"<<endl;
-
+		index++;
 	}
 
 
